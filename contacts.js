@@ -17,8 +17,8 @@ export async function getContactById(contactId) {
     const res = await listContacts();
     const [result] = res.filter((contact) => contact.id === contactId);
     return result || null;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -28,11 +28,8 @@ export async function removeContact(contactId) {
   if (idx === -1) {
     return null;
   }
-
   const [removed] = contacts.splice(idx, 1);
-
-  writeFile(contactsPath, JSON.stringify(contacts));
-
+  writeFile(contactsPath, JSON.stringify(contacts), "utf-8");
   return removed;
 }
 
@@ -40,18 +37,13 @@ export async function addContact(name, email, phone) {
   try {
     const contacts = await listContacts();
     const newContact = { id: nanoid(), name, email, phone };
-    if (
-      contacts.some(
-        (contact) => contact.name === name && contact.email === email
-      )
-    ) {
+    if (contacts.some((contact) => contact.email === email)) {
       return console.log(
-        `The contact name: ${name} with email: ${email} already exist, add someone new please`
+        `This email: ${email} already exist, add someone new please`
       );
     }
-
     contacts.push(newContact);
-    writeFile(contactsPath, JSON.stringify(contacts));
+    writeFile(contactsPath, JSON.stringify(contacts), "utf-8");
     return newContact;
   } catch (error) {
     console.log(error);
