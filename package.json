@@ -1,0 +1,23 @@
+{
+  "name": "cliwork",
+  "version": "1.0.0",
+  "description": "Lesson1",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "start:watch": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vita Filatova",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^10.0.0",
+    "nanoid": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "prettier": "2.8.7"
+  }
+}
